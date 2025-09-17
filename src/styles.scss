@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import 'app/shared/styles/_grid';
+
 // Global Reset
 *,
 *::after,
@@ -21,4 +23,14 @@ body {
   max-width: 90rem;
   margin: 20px auto;
   margin-bottom: 0;
+}
+
+.hidden {
+  display: none;
+}
+.invisible {
+  visibility: hidden;
+}
+.visible {
+  visibility: visible;
 }
