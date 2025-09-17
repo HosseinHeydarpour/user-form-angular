@@ -1,28 +1,65 @@
-<form [formGroup]="userInfoForm" class="grid grid-cols-2 gap-2">
+<form [formGroup]="userInfoForm" class="grid grid-cols-2 gap-2" (ngSubmit)="onFormSubmission()">
   <div class="form-group flex flex-col gap-2">
-    <dx-text-box formControlName="firstName" [label]="'First Name'" labelMode="floating">
+    <!-- First Name -->
+    <dx-text-box
+      formControlName="firstName"
+      [label]="'First Name'"
+      labelMode="floating"
+      (onBlur)="markAsTouched('firstName')"
+    >
     </dx-text-box>
+    <span class="text-red-500 text-sm">{{ getError('firstName') }}</span>
 
-    <dx-text-box formControlName="lastName" [label]="'Last Name'" labelMode="floating">
+    <!-- Last Name -->
+    <dx-text-box
+      formControlName="lastName"
+      [label]="'Last Name'"
+      labelMode="floating"
+      (onBlur)="markAsTouched('lastName')"
+    >
     </dx-text-box>
+    <span class="text-red-500 text-sm">{{ getError('lastName') }}</span>
 
-    <dx-text-box formControlName="age" [label]="'Age'" labelMode="floating" type="number">
-    </dx-text-box>
+    <!-- Age -->
+    <dx-number-box
+      formControlName="age"
+      [label]="'Age'"
+      labelMode="floating"
+      (onBlur)="markAsTouched('age')"
+    >
+    </dx-number-box>
+    <span class="text-red-500 text-sm">{{ getError('age') }}</span>
   </div>
 
   <div class="form-group flex flex-col gap-2">
-    <dx-text-box formControlName="education" [label]="'Education'" labelMode="floating">
-    </dx-text-box>
-
-    <dx-text-box formControlName="nationalID" [label]="'National ID'" labelMode="floating">
-    </dx-text-box>
-
+    <!-- Education -->
     <dx-text-box
+      formControlName="education"
+      [label]="'Education'"
+      labelMode="floating"
+      (onBlur)="markAsTouched('education')"
+    >
+    </dx-text-box>
+    <span class="text-red-500 text-sm">{{ getError('education') }}</span>
+
+    <!-- National ID -->
+    <dx-text-box
+      formControlName="nationalID"
+      [label]="'National ID'"
+      labelMode="floating"
+      (onBlur)="markAsTouched('nationalID')"
+    >
+    </dx-text-box>
+    <span class="text-red-500 text-sm">{{ getError('nationalID') }}</span>
+
+    <!-- Birth Date -->
+    <dx-date-box
       formControlName="birthDate"
       [label]="'Birth Date'"
       labelMode="floating"
-      type="date"
+      (onBlur)="markAsTouched('birthDate')"
     >
-    </dx-text-box>
+    </dx-date-box>
+    <span class="text-red-500 text-sm">{{ getError('birthDate') }}</span>
   </div>
 </form>
