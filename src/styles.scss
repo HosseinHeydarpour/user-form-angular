@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import 'app/shared/styles/_grid';
+@import 'app/shared/styles/_icon';
 
 // Global Reset
 *,
@@ -33,4 +34,11 @@ body {
 }
 .visible {
   visibility: visible;
+}
+
+.border-b-gray {
+  border: none;
+  border-bottom: 1px solid #ccc;
+  padding: 8px 0;
+  outline: none;
 }

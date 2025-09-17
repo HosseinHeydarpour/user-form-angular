@@ -14,4 +14,8 @@ export class Popup {
   get isVisible() {
     return this.popupService.popIsVisibleReadOnly();
   }
+
+  closePopup() {
+    this.popupService.closePopup();
+  }
 }
