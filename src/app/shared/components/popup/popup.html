@@ -19,9 +19,15 @@
     <ng-content></ng-content>
   </div>
   @if (popupConfig().hasButtons) {
-  <div class="popup__footer">
+  <div class="popup__footer flex items-center gap-2">
     @for (button of popupConfig().buttons; track $index) {
-    <dx-button [text]="button.title" (onClick)="(button.action)"> </dx-button>
+    <dx-button
+      [text]="button.title"
+      (onClick)="(button.action)"
+      [type]="button.type"
+      [stylingMode]="button.stylingMode"
+    >
+    </dx-button>
     }
   </div>
   }
