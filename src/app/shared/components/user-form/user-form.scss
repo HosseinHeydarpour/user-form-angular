@@ -1,5 +1,12 @@
-.form {
+form {
   height: 100%;
   padding-left: 20px;
   padding-right: 20px;
+  margin-top: 25px;
+}
+
+::ng-deep .dx-texteditor {
+  height: 48px; /* make input taller */
+  font-size: 16px; /* bigger text */
+  border-radius: 8px; /* rounded corners */
 }
