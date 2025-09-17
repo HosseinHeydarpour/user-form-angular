@@ -19,7 +19,7 @@
     <ng-content></ng-content>
   </div>
   @if (popupConfig().hasButtons) {
-  <div class="popup__footer flex items-center gap-2">
+  <div class="popup__footer flex gap-2 border-t-gray">
     @for (button of popupConfig().buttons; track $index) {
     <dx-button
       [text]="button.title"

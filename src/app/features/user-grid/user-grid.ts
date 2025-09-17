@@ -6,10 +6,11 @@ import { IUser } from '../../core/models/user.model';
 import { PopupService } from '../../core/services/popup-service';
 import { Popup } from '../../shared/components/popup/popup';
 import { IPopupConfig } from '../../core/models/popup.model';
+import { UserForm } from '../../shared/components/user-form/user-form';
 
 @Component({
   selector: 'app-user-grid',
-  imports: [CommonModule, DxDataGridModule, Popup],
+  imports: [CommonModule, DxDataGridModule, Popup, UserForm],
   templateUrl: './user-grid.html',
   styleUrl: './user-grid.scss',
 })
@@ -22,8 +23,18 @@ export class UserGrid {
   popupConfig: IPopupConfig = {
     title: 'Confirm Delete',
     buttons: [
-      { title: 'Cancel', action: () => console.log('Cancelled') },
-      { title: 'Delete', action: () => console.log('Deleted') },
+      {
+        title: 'Delete',
+        action: () => this.popupService.closePopup(),
+        type: 'success',
+        stylingMode: 'contained',
+      },
+      {
+        title: 'Cancel',
+        action: () => this.popupService.closePopup(),
+        type: 'danger',
+        stylingMode: 'outlined',
+      },
     ],
     hasButtons: true,
   };
