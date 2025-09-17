@@ -7,7 +7,16 @@
 
   <!-- Toolbar -->
   <dxo-toolbar>
-    <dxi-item name="addRowButton"></dxi-item>
+    <dxi-item
+      widget="dxButton"
+      location="before"
+      [options]="{
+        icon: 'add',
+        text: 'Add User',
+        onClick: openCustomPopup
+      }"
+    >
+    </dxi-item>
     <dxi-item name="columnChooserButton" locateInMenu="auto" location="after"></dxi-item>
     <!-- Add the search panel button to toolbar -->
     <dxi-item name="searchPanel"></dxi-item>

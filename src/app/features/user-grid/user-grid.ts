@@ -14,4 +14,8 @@ export class UserGrid {
   userService = inject(User);
   users: IUser[] = this.userService.getUsers();
   constructor() {}
+
+  openCustomPopup() {
+    console.log('Hello World!');
+  }
 }
