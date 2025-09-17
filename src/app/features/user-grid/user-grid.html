@@ -1,1 +1,18 @@
-<dx-data-grid id="userDataGrid" [dataSource]="users" [allowColumnReordering]="true"> </dx-data-grid>
+<dx-data-grid id="userDataGrid" [dataSource]="users" [allowColumnReordering]="true">
+  <!-- Enable Editing -->
+  <dxo-editing [allowAdding]="true"></dxo-editing>
+
+  <!-- Enable Column Chooser -->
+  <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+
+  <!-- Toolbar -->
+  <dxo-toolbar>
+    <dxi-item name="addRowButton"></dxi-item>
+    <dxi-item name="columnChooserButton" locateInMenu="auto" location="after"></dxi-item>
+    <!-- Add the search panel button to toolbar -->
+    <dxi-item name="searchPanel"></dxi-item>
+  </dxo-toolbar>
+
+  <!-- Search Panel -->
+  <dxo-search-panel [visible]="true" [highlightCaseSensitive]="false"> </dxo-search-panel>
+</dx-data-grid>
