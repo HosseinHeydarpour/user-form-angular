@@ -50,10 +50,10 @@
     <!-- Command Column -->
     <dxi-column type="buttons">
       <!-- Custom Edit -->
-      <dxi-button hint="Edit" icon="edit"></dxi-button>
+      <dxi-button hint="Edit" icon="edit" [onClick]="onEditClicked"></dxi-button>
 
       <!-- Custom Delete -->
-      <dxi-button hint="Delete" icon="trash"></dxi-button>
+      <dxi-button hint="Delete" icon="trash" [onClick]="onDeleteClicked"></dxi-button>
     </dxi-column>
   </dx-data-grid>
 

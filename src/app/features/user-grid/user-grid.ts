@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { DxDataGridModule } from 'devextreme-angular';
-import { User } from '../../core/services/user';
+import { UserService } from '../../core/services/user-service';
 import { IUser } from '../../core/models/user.model';
 import { PopupService } from '../../core/services/popup-service';
 import { Popup } from '../../shared/components/popup/popup';
@@ -16,7 +16,7 @@ import { DxButtonModule } from 'devextreme-angular';
   styleUrl: './user-grid.scss',
 })
 export class UserGrid {
-  userService = inject(User);
+  userService = inject(UserService);
   users: IUser[] = this.userService.getUsers();
   popupService = inject(PopupService);
   addButtonOptions: any;
@@ -46,10 +46,22 @@ export class UserGrid {
       text: 'Add User',
       onClick: () => this.openCustomPopup(), // Arrow function fixes `this`
     };
+
+    this.onEditClicked = this.onEditClicked.bind(this);
   }
 
   openCustomPopup() {
     console.log('clicked');
     this.popupService.openPopup();
   }
+
+  onEditClicked(event: any) {
+    const userToEdit: IUser = event.row.data;
+    console.log('Editing user:', userToEdit);
+
+    // Use the service to send the user data
+    this.userService.setSingleUserData(userToEdit);
+  }
+
+  onDeleteClicked(event: any) {}
 }
