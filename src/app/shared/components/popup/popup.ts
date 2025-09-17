@@ -18,4 +18,8 @@ export class Popup {
   closePopup() {
     this.popupService.closePopup();
   }
+
+  onBackdropClicked() {
+    this.popupService.closePopup();
+  }
 }
