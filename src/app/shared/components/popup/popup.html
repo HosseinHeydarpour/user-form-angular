@@ -1,1 +1,10 @@
-<p>popup works!</p>
+<div
+  class="popup"
+  [ngClass]="{
+    show: isVisible()
+  }"
+>
+  <div class="popup__header"></div>
+  <div class="popup__body" [ngClass]=""></div>
+  <div class="popup__footer" [ngClass]=""></div>
+</div>

@@ -1,0 +1,16 @@
+.popup {
+  visibility: hidden;
+  transform: scale(0);
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+  background-color: white;
+  border-radius: 15px;
+  width: 400px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+
+  &.show {
+    visibility: visible;
+    transform: scale(1);
+    opacity: 1;
+  }
+}
