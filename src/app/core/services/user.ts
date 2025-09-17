@@ -1,10 +1,16 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { users } from '../dev-data/mock-users';
+import { IUser } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class User {
   // Mock data coming from dev-data folder
-  Users = users;
+  private usersData = signal<IUser[]>(users);
+
+  // Read OP
+  getUsers() {
+    return this.usersData();
+  }
 }
