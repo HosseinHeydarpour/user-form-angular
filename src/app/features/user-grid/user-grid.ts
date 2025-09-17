@@ -5,6 +5,7 @@ import { User } from '../../core/services/user';
 import { IUser } from '../../core/models/user.model';
 import { PopupService } from '../../core/services/popup-service';
 import { Popup } from '../../shared/components/popup/popup';
+import { IPopupConfig } from '../../core/models/popup.model';
 
 @Component({
   selector: 'app-user-grid',
@@ -17,6 +18,16 @@ export class UserGrid {
   users: IUser[] = this.userService.getUsers();
   popupService = inject(PopupService);
   addButtonOptions: any;
+
+  popupConfig: IPopupConfig = {
+    title: 'Confirm Delete',
+    buttons: [
+      { title: 'Cancel', action: () => console.log('Cancelled') },
+      { title: 'Delete', action: () => console.log('Deleted') },
+    ],
+    hasButtons: true,
+  };
+
   constructor() {
     this.addButtonOptions = {
       icon: 'add',

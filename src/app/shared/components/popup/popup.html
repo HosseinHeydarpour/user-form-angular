@@ -12,11 +12,17 @@
   }"
 >
   <div class="popup__header border-b-gray flex justify-between items-center">
-    <h2>User Details</h2>
+    <h2>{{ popupConfig().title }}</h2>
     <i class="icon-close popup__close" (click)="closePopup()"></i>
   </div>
   <div class="popup__body">
     <ng-content></ng-content>
   </div>
-  <div class="popup__footer" [ngClass]=""></div>
+  @if (popupConfig().hasButtons) {
+  <div class="popup__footer">
+    @for (button of popupConfig().buttons; track $index) {
+    <dx-button [text]="button.title" (onClick)="(button.action)"> </dx-button>
+    }
+  </div>
+  }
 </div>
