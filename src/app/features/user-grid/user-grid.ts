@@ -48,6 +48,7 @@ export class UserGrid {
     };
 
     this.onEditClicked = this.onEditClicked.bind(this);
+    this.onDeleteClicked = this.onDeleteClicked.bind(this);
   }
 
   openCustomPopup() {
@@ -64,5 +65,11 @@ export class UserGrid {
     this.popupService.openPopup();
   }
 
-  onDeleteClicked(event: any) {}
+  onDeleteClicked(event: any) {
+    const userToDelete: IUser = event.row.data;
+
+    // Find the user in the current users array by a unique identifier (e.g., nationalID)
+    // and create a new array without that user.
+    this.users = this.users.filter((user) => user.nationalID !== userToDelete.nationalID);
+  }
 }
