@@ -1,10 +1,14 @@
 <div class="data-grid__container">
-  <dx-data-grid id="userDataGrid" [dataSource]="users" [allowColumnReordering]="true">
+  <dx-data-grid
+    id="userDataGrid"
+    [dataSource]="users"
+    [allowColumnReordering]="true"
+    [columnAutoWidth]="true"
+    [allowColumnResizing]="true"
+    [wordWrapEnabled]="true"
+  >
     <!-- Enable Editing -->
     <dxo-editing [allowAdding]="true"></dxo-editing>
-
-    <!-- Enable Column Chooser -->
-    <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
 
     <!-- Toolbar -->
     <dxo-toolbar>
