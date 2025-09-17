@@ -12,4 +12,14 @@
 body {
   font-size: 14px;
   background-color: #fafafa;
+  display: flex;
+  min-height: 100dvh;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.container {
+  max-width: 90rem;
+  margin: 0 auto;
 }

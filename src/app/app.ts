@@ -1,9 +1,10 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { UserGrid } from './features/user-grid/user-grid';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, UserGrid],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
