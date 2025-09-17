@@ -57,10 +57,11 @@ export class UserGrid {
 
   onEditClicked(event: any) {
     const userToEdit: IUser = event.row.data;
-    console.log('Editing user:', userToEdit);
 
     // Use the service to send the user data
     this.userService.setSingleUserData(userToEdit);
+
+    this.popupService.openPopup();
   }
 
   onDeleteClicked(event: any) {}
