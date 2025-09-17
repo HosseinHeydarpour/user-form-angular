@@ -20,6 +20,41 @@
 
     <!-- Search Panel -->
     <dxo-search-panel [visible]="true" [highlightCaseSensitive]="false"> </dxo-search-panel>
+
+    <!-- Profile Photo Column -->
+    <dxi-column
+      caption="Profile Photo"
+      [width]="120"
+      alignment="center"
+      cellTemplate="photoTemplate"
+    >
+    </dxi-column>
+    <div *dxTemplate="let data of 'photoTemplate'">
+      <img
+        [src]="data.data.profilePhoto"
+        class="profile-photo"
+        width="40"
+        height="40"
+        style="border-radius: 50%"
+      />
+    </div>
+
+    <!-- Other Data Columns -->
+    <dxi-column dataField="firstName" caption="First Name"></dxi-column>
+    <dxi-column dataField="lastName" caption="Last Name"></dxi-column>
+    <dxi-column dataField="age" caption="Age"></dxi-column>
+    <dxi-column dataField="education" caption="Education"></dxi-column>
+    <dxi-column dataField="nationalID" caption="National ID"></dxi-column>
+    <dxi-column dataField="birthdate" caption="Birthdate" dataType="date"></dxi-column>
+
+    <!-- Command Column -->
+    <dxi-column type="buttons">
+      <!-- Custom Edit -->
+      <dxi-button hint="Edit" icon="edit"></dxi-button>
+
+      <!-- Custom Delete -->
+      <dxi-button hint="Delete" icon="trash"></dxi-button>
+    </dxi-column>
   </dx-data-grid>
 
   <!-- Pop Up -->

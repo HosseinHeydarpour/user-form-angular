@@ -7,10 +7,11 @@ import { PopupService } from '../../core/services/popup-service';
 import { Popup } from '../../shared/components/popup/popup';
 import { IPopupConfig } from '../../core/models/popup.model';
 import { UserForm } from '../../shared/components/user-form/user-form';
+import { DxButtonModule } from 'devextreme-angular';
 
 @Component({
   selector: 'app-user-grid',
-  imports: [CommonModule, DxDataGridModule, Popup, UserForm],
+  imports: [CommonModule, DxDataGridModule, Popup, UserForm, DxButtonModule],
   templateUrl: './user-grid.html',
   styleUrl: './user-grid.scss',
 })
