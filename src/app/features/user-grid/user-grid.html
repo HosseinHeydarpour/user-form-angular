@@ -1,27 +1,23 @@
-<dx-data-grid id="userDataGrid" [dataSource]="users" [allowColumnReordering]="true">
-  <!-- Enable Editing -->
-  <dxo-editing [allowAdding]="true"></dxo-editing>
+<div class="data-grid__container">
+  <dx-data-grid id="userDataGrid" [dataSource]="users" [allowColumnReordering]="true">
+    <!-- Enable Editing -->
+    <dxo-editing [allowAdding]="true"></dxo-editing>
 
-  <!-- Enable Column Chooser -->
-  <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+    <!-- Enable Column Chooser -->
+    <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
 
-  <!-- Toolbar -->
-  <dxo-toolbar>
-    <dxi-item
-      widget="dxButton"
-      location="before"
-      [options]="{
-        icon: 'add',
-        text: 'Add User',
-        onClick: openCustomPopup
-      }"
-    >
-    </dxi-item>
-    <dxi-item name="columnChooserButton" locateInMenu="auto" location="after"></dxi-item>
-    <!-- Add the search panel button to toolbar -->
-    <dxi-item name="searchPanel"></dxi-item>
-  </dxo-toolbar>
+    <!-- Toolbar -->
+    <dxo-toolbar>
+      <dxi-item widget="dxButton" location="before" [options]="addButtonOptions"> </dxi-item>
+      <dxi-item name="columnChooserButton" locateInMenu="auto" location="after"></dxi-item>
+      <!-- Add the search panel button to toolbar -->
+      <dxi-item name="searchPanel"></dxi-item>
+    </dxo-toolbar>
 
-  <!-- Search Panel -->
-  <dxo-search-panel [visible]="true" [highlightCaseSensitive]="false"> </dxo-search-panel>
-</dx-data-grid>
+    <!-- Search Panel -->
+    <dxo-search-panel [visible]="true" [highlightCaseSensitive]="false"> </dxo-search-panel>
+  </dx-data-grid>
+
+  <!-- Pop Up -->
+  <app-popup></app-popup>
+</div>

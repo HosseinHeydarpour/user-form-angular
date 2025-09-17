@@ -7,7 +7,8 @@ export class PopupService {
   private popupIsVisible = signal<boolean>(false);
   popIsVisibleReadOnly = this.popupIsVisible.asReadonly;
 
-  openPop() {
+  openPopup() {
+    console.log('open');
     this.popupIsVisible.set(true);
   }
   closePopup() {

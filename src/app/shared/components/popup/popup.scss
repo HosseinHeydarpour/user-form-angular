@@ -4,13 +4,21 @@
   opacity: 0;
   transition: all 0.3s ease-in-out;
   background-color: white;
-  border-radius: 15px;
-  width: 400px;
+  border-radius: 10px;
+
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
 
   &.show {
+    width: 80%;
     visibility: visible;
     transform: scale(1);
     opacity: 1;
+    position: absolute;
+    top: 0;
+    z-index: 50000000;
+    height: 500px;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
   }
 }
