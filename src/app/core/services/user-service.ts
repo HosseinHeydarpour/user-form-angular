@@ -17,6 +17,9 @@ export class UserService {
 
   setSingleUserData(data: IUser) {
     this.singleUserData.set(data);
-    console.log(data);
+  }
+
+  addUserData(data: IUser) {
+    this.usersData().push(data);
   }
 }
