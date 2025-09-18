@@ -23,7 +23,7 @@ export class UserGrid implements OnDestroy {
   private fileUrlCache = new Map<File, string>();
 
   popupConfig: IPopupConfig = {
-    title: 'Confirm Delete',
+    title: 'Create User',
     hasButtons: false,
   };
 
