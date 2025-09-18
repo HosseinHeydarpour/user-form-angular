@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { DxDataGridModule } from 'devextreme-angular';
 import { UserService } from '../../core/services/user-service';
 import { IUser } from '../../core/models/user.model';
@@ -15,11 +15,12 @@ import { DxButtonModule } from 'devextreme-angular';
   templateUrl: './user-grid.html',
   styleUrl: './user-grid.scss',
 })
-export class UserGrid {
+export class UserGrid implements OnDestroy {
   userService = inject(UserService);
   users: IUser[] = this.userService.getUsers();
   popupService = inject(PopupService);
   addButtonOptions: any;
+  private fileUrlCache = new Map<File, string>();
 
   popupConfig: IPopupConfig = {
     title: 'Confirm Delete',
@@ -57,5 +58,32 @@ export class UserGrid {
     // Find the user in the current users array by a unique identifier (e.g., nationalID)
     // and create a new array without that user.
     this.users = this.users.filter((user) => user.nationalID !== userToDelete.nationalID);
+  }
+
+  getImageSrc(profilePhoto: any): string | null {
+    if (!profilePhoto) return null;
+
+    // If it's already a string (URL or data URL), return as-is
+    if (typeof profilePhoto === 'string') {
+      return profilePhoto;
+    }
+
+    // If it's a File object, generate a data URL
+    if (profilePhoto instanceof File) {
+      // Create a local cache to avoid regenerating URL on every change detection
+      if (!this.fileUrlCache.has(profilePhoto)) {
+        const url = URL.createObjectURL(profilePhoto);
+        this.fileUrlCache.set(profilePhoto, url);
+        // Optional: Revoke later if needed (e.g., on destroy or replace)
+      }
+      return this.fileUrlCache.get(profilePhoto)!;
+    }
+
+    return null;
+  }
+
+  ngOnDestroy(): void {
+    this.fileUrlCache.forEach((url) => URL.revokeObjectURL(url));
+    this.fileUrlCache.clear();
   }
 }

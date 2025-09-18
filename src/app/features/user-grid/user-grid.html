@@ -31,11 +31,12 @@
     </dxi-column>
     <div *dxTemplate="let data of 'photoTemplate'">
       <img
-        [src]="data.data.profilePhoto"
+        [src]="getImageSrc(data.data.profilePhoto)"
         class="profile-photo"
         width="40"
         height="40"
         style="border-radius: 50%"
+        [hidden]="!getImageSrc(data.data.profilePhoto)"
       />
     </div>
 

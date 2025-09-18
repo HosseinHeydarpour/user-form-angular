@@ -92,7 +92,6 @@ export class UserForm {
   }
 
   onFormSubmission() {
-    console.log(this.userInfoForm);
     if (this.userInfoForm.valid && this.mode === 'create') {
       const rawValue = this.userInfoForm.getRawValue();
 
@@ -106,6 +105,8 @@ export class UserForm {
         birthdate: formattedBirthDate,
       };
       this.userService.addUserData(payload);
+      this.userInfoForm.reset();
+      this.popupService.closePopup();
     }
   }
 }
