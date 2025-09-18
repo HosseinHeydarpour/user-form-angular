@@ -32,15 +32,19 @@ export class UserForm {
   popupService = inject(PopupService);
   mode: 'create' | 'edit' = 'create';
   userNationalId!: number;
+  maxBirthdate!: Date;
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
   constructor() {
+    const today = new Date();
+    this.maxBirthdate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+
     this.userInfoForm = new FormGroup({
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
-      age: new FormControl(null, [Validators.required, Validators.min(0)]),
+      age: new FormControl(null, [Validators.required, Validators.min(18)]),
       education: new FormControl('', Validators.required),
-      nationalID: new FormControl('', Validators.required),
+      nationalID: new FormControl<number | null>(null, [Validators.required]),
       birthdate: new FormControl('', Validators.required),
       profilePhoto: new FormControl<File | null>(null, Validators.required),
     });
