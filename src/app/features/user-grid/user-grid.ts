@@ -23,21 +23,7 @@ export class UserGrid {
 
   popupConfig: IPopupConfig = {
     title: 'Confirm Delete',
-    buttons: [
-      {
-        title: 'Delete',
-        action: () => this.popupService.closePopup(),
-        type: 'success',
-        stylingMode: 'contained',
-      },
-      {
-        title: 'Cancel',
-        action: () => this.popupService.closePopup(),
-        type: 'danger',
-        stylingMode: 'outlined',
-      },
-    ],
-    hasButtons: true,
+    hasButtons: false,
   };
 
   constructor() {
