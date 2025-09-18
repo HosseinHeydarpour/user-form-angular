@@ -46,10 +46,10 @@ export class UserForm {
 
     effect(() => {
       const user = this.userService.singleUserData();
+      const popupVisible = this.popupService.popIsVisibleReadOnly();
 
       if (user) {
         // If user data exists, patch the form
-        console.log('User data received, patching form:', user);
         this.userInfoForm.patchValue(user);
         if (typeof user.profilePhoto === 'string') {
           this.imagePreview = user.profilePhoto;
@@ -66,6 +66,10 @@ export class UserForm {
         console.log('No user data, resetting form.');
         this.userInfoForm.reset();
         this.mode = 'create';
+      }
+
+      if (!popupVisible) {
+        this.resetFormAndFileInput();
       }
     });
   }

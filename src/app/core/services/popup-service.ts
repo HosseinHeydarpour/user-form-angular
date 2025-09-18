@@ -5,7 +5,7 @@ import { Injectable, signal } from '@angular/core';
 })
 export class PopupService {
   private popupIsVisible = signal<boolean>(false);
-  popIsVisibleReadOnly = this.popupIsVisible.asReadonly;
+  popIsVisibleReadOnly = this.popupIsVisible.asReadonly();
 
   openPopup() {
     console.log('open');
