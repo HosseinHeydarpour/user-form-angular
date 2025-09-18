@@ -3,7 +3,7 @@
   <div class="profile-uploader col-span-2">
     <label for="photo" class="profile-uploader__label">
       <img
-        [src]="imagePreview || 'https://via.placeholder.com/150'"
+        [src]="imagePreview || 'https://avatar.iran.liara.run/public/2'"
         alt="Profile Preview"
         class="profile-uploader__preview"
       />
@@ -112,12 +112,7 @@
       [disabled]="!userInfoForm.valid"
     >
     </dx-button>
-    <dx-button
-      text="Cancel"
-      type="danger"
-      stylingMode="outlined"
-      (onClick)="popupService.closePopup()"
-    >
+    <dx-button text="Cancel" type="danger" stylingMode="outlined" (onClick)="onCancel()">
     </dx-button>
   </div>
 </form>
