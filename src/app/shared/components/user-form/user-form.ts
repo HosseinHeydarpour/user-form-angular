@@ -7,6 +7,8 @@ import { DxNumberBoxModule } from 'devextreme-angular';
 import { DxDateBoxModule } from 'devextreme-angular';
 import { UserService } from '../../../core/services/user-service';
 import { DxFileUploaderModule } from 'devextreme-angular';
+import { PopupService } from '../../../core/services/popup-service';
+import { DxButtonModule } from 'devextreme-angular';
 
 @Component({
   selector: 'app-user-form',
@@ -17,6 +19,7 @@ import { DxFileUploaderModule } from 'devextreme-angular';
     DxNumberBoxModule,
     DxDateBoxModule,
     DxFileUploaderModule,
+    DxButtonModule,
   ],
   templateUrl: './user-form.html',
   styleUrl: './user-form.scss',
@@ -25,6 +28,8 @@ export class UserForm {
   userInfoForm!: FormGroup;
   userService = inject(UserService);
   imagePreview: string | ArrayBuffer | null = null;
+  popupService = inject(PopupService);
+  mode!: 'create' | 'edit';
 
   constructor() {
     this.userInfoForm = new FormGroup({
@@ -33,8 +38,8 @@ export class UserForm {
       age: new FormControl(null, [Validators.required, Validators.min(0)]),
       education: new FormControl('', Validators.required),
       nationalID: new FormControl('', Validators.required),
-      birthDate: new FormControl('', Validators.required),
-      profilePhoto: new FormControl('', Validators.required),
+      birthdate: new FormControl('', Validators.required),
+      profilePhoto: new FormControl<File | null>(null, Validators.required),
     });
 
     effect(() => {
@@ -44,10 +49,12 @@ export class UserForm {
         // If user data exists, patch the form
         console.log('User data received, patching form:', user);
         this.userInfoForm.patchValue(user);
+        this.mode = 'edit';
       } else {
         // If user data is null, reset the form
         console.log('No user data, resetting form.');
         this.userInfoForm.reset();
+        this.mode = 'create';
       }
     });
   }
@@ -58,9 +65,9 @@ export class UserForm {
     if (input.files && input.files[0]) {
       const file = input.files[0];
       this.userInfoForm.patchValue({
-        photo: file,
+        profilePhoto: file,
       });
-      this.userInfoForm.get('photo')?.updateValueAndValidity();
+      this.userInfoForm.get('profilePhoto')?.updateValueAndValidity();
 
       // File Preview
       const reader = new FileReader();
@@ -84,5 +91,21 @@ export class UserForm {
     return null;
   }
 
-  onFormSubmission() {}
+  onFormSubmission() {
+    console.log(this.userInfoForm);
+    if (this.userInfoForm.valid && this.mode === 'create') {
+      const rawValue = this.userInfoForm.getRawValue();
+
+      // Format birthdate to YYYY-MM-DD
+      const formattedBirthDate = rawValue.birthdate
+        ? new Date(rawValue.birthdate).toISOString().split('T')[0]
+        : null;
+
+      const payload = {
+        ...rawValue,
+        birthdate: formattedBirthDate,
+      };
+      this.userService.addUserData(payload);
+    }
+  }
 }

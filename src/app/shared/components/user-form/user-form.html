@@ -91,15 +91,33 @@
 
     <!-- Birth Date -->
     <dx-date-box
-      formControlName="birthDate"
+      formControlName="birthdate"
       [label]="'Birth Date'"
       labelMode="floating"
-      (onBlur)="markAsTouched('birthDate')"
+      (onBlur)="markAsTouched('birthdate')"
       stylingMode="outlined"
       [showClearButton]="true"
       hint="Enter your birth date"
     >
     </dx-date-box>
-    <span class="text-red-500 text-sm">{{ getError('birthDate') }}</span>
+    <span class="text-red-500 text-sm">{{ getError('birthdate') }}</span>
+  </div>
+
+  <div class="border-t-gray col-span-2 flex items-center gap-2 justify-between">
+    <dx-button
+      text="Save"
+      type="success"
+      stylingMode="contained"
+      [useSubmitBehavior]="true"
+      [disabled]="!userInfoForm.valid"
+    >
+    </dx-button>
+    <dx-button
+      text="Cancel"
+      type="danger"
+      stylingMode="outlined"
+      (onClick)="popupService.closePopup()"
+    >
+    </dx-button>
   </div>
 </form>
