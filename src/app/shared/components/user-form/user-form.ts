@@ -31,6 +31,7 @@ export class UserForm {
   imagePreview: string | ArrayBuffer | null = null;
   popupService = inject(PopupService);
   mode: 'create' | 'edit' = 'create';
+  userNationalId!: number;
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
   constructor() {
@@ -56,6 +57,7 @@ export class UserForm {
       if (user) {
         // If user data exists, patch the form
         this.userInfoForm.patchValue(user);
+        this.userNationalId = user.nationalID;
         if (typeof user.profilePhoto === 'string') {
           this.imagePreview = user.profilePhoto;
         } else if (user.profilePhoto instanceof File) {
@@ -122,6 +124,8 @@ export class UserForm {
     // Ensure profilePhoto control is explicitly cleared (defensive programming)
     this.userInfoForm.get('profilePhoto')?.setValue(null);
 
+    this.userNationalId = 0;
+
     this.userService.resetSingleUser();
   }
 
@@ -139,6 +143,23 @@ export class UserForm {
         birthdate: formattedBirthDate,
       };
       this.userService.addUserData(payload);
+
+      this.resetFormAndFileInput();
+
+      this.popupService.closePopup();
+    } else if (this.userInfoForm.valid && this.mode === 'edit') {
+      const rawValue = this.userInfoForm.getRawValue();
+
+      // Format birthdate to YYYY-MM-DD
+      const formattedBirthDate = rawValue.birthdate
+        ? new Date(rawValue.birthdate).toISOString().split('T')[0]
+        : null;
+
+      const payload = {
+        ...rawValue,
+        birthdate: formattedBirthDate,
+      };
+      this.userService.updateUserData(this.userNationalId, payload);
 
       this.resetFormAndFileInput();
 

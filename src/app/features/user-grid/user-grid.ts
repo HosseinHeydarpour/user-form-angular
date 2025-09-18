@@ -46,6 +46,11 @@ export class UserGrid implements OnDestroy {
   onEditClicked(event: any) {
     const userToEdit: IUser = event.row.data;
 
+    this.popupConfig = {
+      title: 'Edit User',
+      hasButtons: false,
+    };
+
     // Use the service to send the user data
     this.userService.setSingleUserData(userToEdit);
 

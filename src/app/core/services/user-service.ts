@@ -26,4 +26,11 @@ export class UserService {
   resetSingleUser() {
     this.singleUserData.set(null);
   }
+
+  updateUserData(originalNationalID: number, data: IUser) {
+    const user = this.usersData().find((u) => u.nationalID === originalNationalID);
+    if (user) {
+      Object.assign(user, data);
+    }
+  }
 }
