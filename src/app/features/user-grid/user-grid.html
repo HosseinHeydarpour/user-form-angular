@@ -35,7 +35,9 @@
       <img
         [src]="getImageSrc(data.data.profilePhoto)"
         class="profile-photo"
-        style="border-radius: 50%; max-width: 100%; height: auto"
+        width="50"
+        height="50"
+        style="border-radius: 50%; object-fit: cover"
         [hidden]="!getImageSrc(data.data.profilePhoto)"
       />
     </div>
