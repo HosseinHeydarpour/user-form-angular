@@ -7,6 +7,6 @@ export interface IPopupButton {
 
 export interface IPopupConfig {
   title: string; // Popup title
-  buttons: IPopupButton[]; // Array of buttons
+  buttons?: IPopupButton[]; // Array of buttons
   hasButtons: boolean;
 }
