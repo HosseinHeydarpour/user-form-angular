@@ -16,7 +16,7 @@ Designed with clean architecture and modern Angular practices, this project show
 - ✅ **Read** / View user list in a responsive data grid
 - ✅ **Update** existing user details
 - 🚀 Built with **Angular 20** and modern **Signals API** for granular reactivity
-- 💄 Styled with **DevExtreme Angular Components** (DataGrid, Form, Popup, Button, etc.)
+- 💄 Styled with **DevExtreme Angular Components** (DataGrid, Form Inputs, Button, etc.)
 - 🔄 Real-time UI updates using Signals — no manual change detection or complex RxJS chains
 
 ---
