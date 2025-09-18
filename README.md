@@ -15,7 +15,6 @@ Designed with clean architecture and modern Angular practices, this project show
 - ✅ **Create** new users with form validation
 - ✅ **Read** / View user list in a responsive data grid
 - ✅ **Update** existing user details
-- ✅ **Delete** users with confirmation
 - 🚀 Built with **Angular 20** and modern **Signals API** for granular reactivity
 - 💄 Styled with **DevExtreme Angular Components** (DataGrid, Form, Popup, Button, etc.)
 - 🔄 Real-time UI updates using Signals — no manual change detection or complex RxJS chains
