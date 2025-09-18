@@ -30,7 +30,7 @@ export class UserForm {
   userService = inject(UserService);
   imagePreview: string | ArrayBuffer | null = null;
   popupService = inject(PopupService);
-  mode!: 'create' | 'edit';
+  mode: 'create' | 'edit' = 'create';
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
   constructor() {
@@ -51,6 +51,15 @@ export class UserForm {
         // If user data exists, patch the form
         console.log('User data received, patching form:', user);
         this.userInfoForm.patchValue(user);
+        if (typeof user.profilePhoto === 'string') {
+          this.imagePreview = user.profilePhoto;
+        } else if (user.profilePhoto instanceof File) {
+          // It's a File → generate object URL
+          this.imagePreview = URL.createObjectURL(user.profilePhoto);
+        } else {
+          this.imagePreview = null;
+        }
+
         this.mode = 'edit';
       } else {
         // If user data is null, reset the form
