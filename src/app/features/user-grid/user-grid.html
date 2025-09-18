@@ -6,6 +6,8 @@
     [columnAutoWidth]="true"
     [allowColumnResizing]="true"
     [wordWrapEnabled]="true"
+    [columnHidingEnabled]="true"
+    [showBorders]="true"
   >
     <!-- Enable Editing -->
     <dxo-editing [allowAdding]="true"></dxo-editing>
@@ -24,7 +26,7 @@
     <!-- Profile Photo Column -->
     <dxi-column
       caption="Profile Photo"
-      [width]="120"
+      [minWidth]="120"
       alignment="center"
       cellTemplate="photoTemplate"
     >
@@ -33,9 +35,7 @@
       <img
         [src]="getImageSrc(data.data.profilePhoto)"
         class="profile-photo"
-        width="40"
-        height="40"
-        style="border-radius: 50%"
+        style="border-radius: 50%; max-width: 100%; height: auto"
         [hidden]="!getImageSrc(data.data.profilePhoto)"
       />
     </div>
