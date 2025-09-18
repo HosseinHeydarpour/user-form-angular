@@ -33,4 +33,8 @@ export class UserService {
       Object.assign(user, data);
     }
   }
+
+  deleteUser(data: IUser) {
+    this.usersData.set(this.usersData().filter((user) => user.nationalID !== data.nationalID));
+  }
 }

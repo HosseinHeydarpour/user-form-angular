@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnDestroy } from '@angular/core';
+import { Component, effect, inject, OnDestroy } from '@angular/core';
 import { DxDataGridModule } from 'devextreme-angular';
 import { UserService } from '../../core/services/user-service';
 import { IUser } from '../../core/models/user.model';
@@ -28,6 +28,10 @@ export class UserGrid implements OnDestroy {
   };
 
   constructor() {
+    effect(() => {
+      this.users = this.userService.getUsers();
+    });
+
     this.addButtonOptions = {
       icon: 'add',
       text: 'Add User',
@@ -62,7 +66,7 @@ export class UserGrid implements OnDestroy {
 
     // Find the user in the current users array by a unique identifier (e.g., nationalID)
     // and create a new array without that user.
-    this.users = this.users.filter((user) => user.nationalID !== userToDelete.nationalID);
+    this.userService.deleteUser(userToDelete);
   }
 
   getImageSrc(profilePhoto: any): string | null {
