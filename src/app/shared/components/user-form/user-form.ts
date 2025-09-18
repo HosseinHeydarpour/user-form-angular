@@ -1,4 +1,5 @@
-import { Component, effect, inject } from '@angular/core';
+import { Component, effect, inject, ElementRef, ViewChild } from '@angular/core';
+
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DxTextBoxModule } from 'devextreme-angular';
 import { DxValidatorModule } from 'devextreme-angular';
@@ -30,6 +31,7 @@ export class UserForm {
   imagePreview: string | ArrayBuffer | null = null;
   popupService = inject(PopupService);
   mode!: 'create' | 'edit';
+  @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
   constructor() {
     this.userInfoForm = new FormGroup({
@@ -91,6 +93,22 @@ export class UserForm {
     return null;
   }
 
+  resetFormAndFileInput(): void {
+    // Reset the form
+    this.userInfoForm.reset();
+
+    // Clear image preview
+    this.imagePreview = null;
+
+    // Clear file input element
+    if (this.fileInput) {
+      this.fileInput.nativeElement.value = '';
+    }
+
+    // Ensure profilePhoto control is explicitly cleared (defensive programming)
+    this.userInfoForm.get('profilePhoto')?.setValue(null);
+  }
+
   onFormSubmission() {
     if (this.userInfoForm.valid && this.mode === 'create') {
       const rawValue = this.userInfoForm.getRawValue();
@@ -105,8 +123,15 @@ export class UserForm {
         birthdate: formattedBirthDate,
       };
       this.userService.addUserData(payload);
-      this.userInfoForm.reset();
+
+      this.resetFormAndFileInput();
+
       this.popupService.closePopup();
     }
+  }
+
+  onCancel() {
+    this.resetFormAndFileInput();
+    this.popupService.closePopup();
   }
 }
