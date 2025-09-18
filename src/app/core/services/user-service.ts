@@ -22,4 +22,8 @@ export class UserService {
   addUserData(data: IUser) {
     this.usersData().push(data);
   }
+
+  resetSingleUser() {
+    this.singleUserData.set(null);
+  }
 }

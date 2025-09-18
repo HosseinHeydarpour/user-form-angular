@@ -45,8 +45,13 @@ export class UserForm {
     });
 
     effect(() => {
-      const user = this.userService.singleUserData();
+      let user = this.userService.singleUserData();
       const popupVisible = this.popupService.popIsVisibleReadOnly();
+
+      if (!popupVisible) {
+        this.resetFormAndFileInput();
+        return;
+      }
 
       if (user) {
         // If user data exists, patch the form
@@ -66,10 +71,6 @@ export class UserForm {
         console.log('No user data, resetting form.');
         this.userInfoForm.reset();
         this.mode = 'create';
-      }
-
-      if (!popupVisible) {
-        this.resetFormAndFileInput();
       }
     });
   }
@@ -120,6 +121,8 @@ export class UserForm {
 
     // Ensure profilePhoto control is explicitly cleared (defensive programming)
     this.userInfoForm.get('profilePhoto')?.setValue(null);
+
+    this.userService.resetSingleUser();
   }
 
   onFormSubmission() {
