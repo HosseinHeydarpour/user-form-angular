@@ -6,6 +6,7 @@ import { DxValidatorModule } from 'devextreme-angular';
 import { DxNumberBoxModule } from 'devextreme-angular';
 import { DxDateBoxModule } from 'devextreme-angular';
 import { UserService } from '../../../core/services/user-service';
+import { DxFileUploaderModule } from 'devextreme-angular';
 
 @Component({
   selector: 'app-user-form',
@@ -15,6 +16,7 @@ import { UserService } from '../../../core/services/user-service';
     DxValidatorModule,
     DxNumberBoxModule,
     DxDateBoxModule,
+    DxFileUploaderModule,
   ],
   templateUrl: './user-form.html',
   styleUrl: './user-form.scss',
@@ -22,6 +24,7 @@ import { UserService } from '../../../core/services/user-service';
 export class UserForm {
   userInfoForm!: FormGroup;
   userService = inject(UserService);
+  imagePreview: string | ArrayBuffer | null = null;
 
   constructor() {
     this.userInfoForm = new FormGroup({
@@ -49,6 +52,24 @@ export class UserForm {
     });
   }
 
+  onFileChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+      this.userInfoForm.patchValue({
+        photo: file,
+      });
+      this.userInfoForm.get('photo')?.updateValueAndValidity();
+
+      // File Preview
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreview = reader.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
   markAsTouched(controlName: string) {
     this.userInfoForm.get(controlName)?.markAsTouched();
   }

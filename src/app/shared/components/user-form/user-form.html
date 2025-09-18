@@ -1,4 +1,26 @@
 <form [formGroup]="userInfoForm" class="grid grid-cols-2 gap-4" (ngSubmit)="onFormSubmission()">
+  <!-- Photo Input -->
+  <div class="profile-uploader col-span-2">
+    <label for="photo" class="profile-uploader__label">
+      <img
+        [src]="imagePreview || 'https://via.placeholder.com/150'"
+        alt="Profile Preview"
+        class="profile-uploader__preview"
+      />
+    </label>
+    <input
+      type="file"
+      id="photo"
+      class="profile-uploader__input"
+      (change)="onFileChange($event)"
+      #fileInput
+    />
+    <button type="button" (click)="fileInput.click()" class="profile-uploader__button">
+      Choose Photo
+    </button>
+    <span class="profile-uploader__error">{{ getError('photo') }}</span>
+  </div>
+
   <div class="form-group flex flex-col gap-2">
     <!-- First Name -->
     <dx-text-box
